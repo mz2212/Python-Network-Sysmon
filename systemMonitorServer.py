@@ -39,7 +39,8 @@ try:
 					lcd.message(data)
 					print("Successfully wrote " + data + " to the display!")
 					if color:
-						lcd.set_color(pickle.loads(color))
+						red, green, blue = pickle.loads(color)
+						lcd.set_color(red, green, blue)
 				else:
 					break
 

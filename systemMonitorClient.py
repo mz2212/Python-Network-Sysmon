@@ -20,15 +20,15 @@ try:
 		cpuUsage = psutil.cpu_percent(interval = 1)
 		data = 'CPU: ' + repr(int(cpuUsage)) + '%'
 		if cpuUsage <= 25:
-			color = 2
+			color = green
 		elif cpuUsage <= 75 and cpuUsage > 25:
-			color = 3
+			color = blue
 		elif cpuUsage < 75:
-			color = 1
+			color = red
 
 
 		sock.sendto(data.encode('utf-8'), (host, port))
-		sock.sendto(pickle.dumps(colors[color]), (host, port))
+		sock.sendto(pickle.dumps(color, protocol = 2), (host, port))
 except KeyboardInterrupt:
 	print("Ctrl-C Recived, Stopping!")
 
