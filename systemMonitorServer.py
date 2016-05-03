@@ -3,6 +3,7 @@
 import time
 import Adafruit_CharLCD as LCD
 import socket
+import pickle
 
 # Variables
 host = ''
@@ -26,20 +27,22 @@ try:
 			try:
 				# 16 * 2 * 8 = 256, or is it just 32? Bits/bytes?
 				data = conn.recv(256)
-				
-				
+				color = conn.recv(64)
+
 			except socket.error:
 				break
-				
+
 			else:
 				if data:
 					lcd.clear()
 					# The problem
 					lcd.message(data)
 					print("Successfully wrote " + data + " to the display!")
-				else: 
+					if color:
+						lcd.set_color(pickle.loads(color))
+				else:
 					break
-		
+
 except KeyboardInterrupt:
 	# Handle Ctrl-C
 	print("Ctrl-C Recived, Stopping!")
