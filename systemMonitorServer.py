@@ -51,3 +51,4 @@ finally:
 	# Cleanup
 	sock.close()
 	lcd.clear()
+	lcd.set_color(0, 0, 0)
