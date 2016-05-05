@@ -20,28 +20,25 @@ print("Press Ctrl-C to stop the server")
 
 try:
 	while 1:
-		conn, addr = sock.accept()
-		print(addr[0] + ":" + str(addr[1]) + " connected!")
-		while 1:
-			try:
-				# 16 * 2 * 8 = 256, or is it just 32? Bits/bytes?
-				data = conn.recv(256)
-				color = conn.recv(64)
+		try:
+			# 16 * 2 * 8 = 256, or is it just 32? Bits/bytes?
+			data = conn.recv(256)
+			color = conn.recv(64)
 
-			except socket.error:
-				break
+		except socket.error:
+			break
 
+		else:
+			if data:
+				lcd.clear()
+				# The problem
+				lcd.message(data)
+				print("Successfully wrote " + data + " to the display!")
+				if color:
+					red, green, blue = pickle.loads(color)
+					lcd.set_color(red, green, blue)
 			else:
-				if data:
-					lcd.clear()
-					# The problem
-					lcd.message(data)
-					print("Successfully wrote " + data + " to the display!")
-					if color:
-						red, green, blue = pickle.loads(color)
-						lcd.set_color(red, green, blue)
-				else:
-					break
+				break
 
 except KeyboardInterrupt:
 	# Handle Ctrl-C
