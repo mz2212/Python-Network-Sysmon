@@ -59,6 +59,7 @@ try:
 
 		sock.sendto(pickle.dumps(sdata, protocol = 2), (host, port))
 		sock.sendto(pickle.dumps(scolor, protocol = 2), (host, port))
+		time.sleep(0.1)
 except KeyboardInterrupt:
 	print("Ctrl-C Recived, Stopping!")
 

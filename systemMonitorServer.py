@@ -29,9 +29,9 @@ try:
 
 		else:
 			if data:
-				lcd.clear()
 				# The problem
 				if header == 'message':
+					lcd.clear()
 					lcd.message(data)
 					print("Successfully wrote " + data + " to the display!")
 				if header == 'color':
