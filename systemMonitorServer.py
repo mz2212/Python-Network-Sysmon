@@ -11,12 +11,11 @@ port = 7166
 
 # init doodads
 lcd = LCD.Adafruit_CharLCDPlate()
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 
 sock.bind((host, port))
 # Listen for a client wanting to send LCD data
-sock.listen(1)
 print("Press Ctrl-C to stop the server")
 
 try:

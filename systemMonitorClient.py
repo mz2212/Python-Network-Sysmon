@@ -20,7 +20,7 @@ disk2 = 'C:\\'
 
 colors = {red, green, blue}
 # init doodads
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.connect((host, port))
 # Functions
 # Converts bytes to human readable values, Thanks Stackoverflow!
@@ -30,7 +30,7 @@ def humanSize(num):
 	while i+1 < len(exp_str) and num >= (2 ** exp_str[i+1][0]):
 		i += 1
 		rounded_val = round(float(num) / 2 ** exp_str[i][0], 2)
-	return '%s%s' % (int(rounded_val), exp_str [i][1])
+	return repr(int(rounded_val) + exp_str)
 
 try:
 	while 1:
