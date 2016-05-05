@@ -22,8 +22,7 @@ try:
 	while 1:
 		try:
 			# 16 * 2 * 8 = 256, or is it just 32? Bits/bytes?
-			data = sock.recv(256)
-			color = sock.recv(64)
+			header, data = pickle.loads(sock.recv(256))
 
 		except socket.error:
 			break
@@ -32,10 +31,11 @@ try:
 			if data:
 				lcd.clear()
 				# The problem
-				lcd.message(data)
-				print("Successfully wrote " + data + " to the display!")
-				if color:
-					red, green, blue = pickle.loads(color)
+				if header == 'message':
+					lcd.message(data)
+					print("Successfully wrote " + data + " to the display!")
+				if header == 'color':
+					red, green, blue = data
 					lcd.set_color(red, green, blue)
 			else:
 				break

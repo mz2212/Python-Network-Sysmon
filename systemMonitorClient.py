@@ -30,7 +30,7 @@ def humanSize(num):
 	while i+1 < len(exp_str) and num >= (2 ** exp_str[i+1][0]):
 		i += 1
 		rounded_val = round(float(num) / 2 ** exp_str[i][0], 2)
-	return repr(int(rounded_val) + exp_str)
+	return '%s%s' % (int(rounded_val), exp_str[i][1])
 
 try:
 	while 1:
@@ -54,9 +54,11 @@ try:
 		elif cpuUsage > 75:
 			color = red
 
+		sdata = ('message', data)
+		scolor = ('color', color)
 
-		sock.sendto(data.encode('utf-8'), (host, port))
-		sock.sendto(pickle.dumps(color, protocol = 2), (host, port))
+		sock.sendto(pickle.dumps(sdata, protocol = 2), (host, port))
+		sock.sendto(pickle.dumps(scolor, protocol = 2), (host, port))
 except KeyboardInterrupt:
 	print("Ctrl-C Recived, Stopping!")
 
