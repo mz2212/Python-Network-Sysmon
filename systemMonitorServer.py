@@ -22,8 +22,8 @@ try:
 	while 1:
 		try:
 			# 16 * 2 * 8 = 256, or is it just 32? Bits/bytes?
-			data = conn.recv(256)
-			color = conn.recv(64)
+			data = sock.recv(256)
+			color = sock.recv(64)
 
 		except socket.error:
 			break
